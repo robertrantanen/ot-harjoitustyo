@@ -3,5 +3,6 @@
 | päivä | aika | mitä tein  |
 | :----:|:-----| :-----|
 | 21.3. | 1    | pohtiminen ja vaatimusmäärittely |
-| yht   | 1    | | 
+| 24.3. | 4    | javaFX:n kertaus ja graafisen käyttöliittymän aloitus |
+| yht   | 5    | | 
 
