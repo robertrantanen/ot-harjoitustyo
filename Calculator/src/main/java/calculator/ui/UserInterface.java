@@ -1,20 +1,14 @@
 package calculator.ui;
 
 import javafx.application.Application;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
 public class UserInterface extends Application {
@@ -22,8 +16,8 @@ public class UserInterface extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        BorderPane layout = new BorderPane();
-        layout.setPrefSize(400, 400);
+        BorderPane mainLayout = new BorderPane();
+        mainLayout.setPrefSize(400, 400);
 
         Label screen = new Label("screen");
 
@@ -36,7 +30,7 @@ public class UserInterface extends Application {
 
         GridPane grid = new GridPane();
 
-        grid.setAlignment(Pos.CENTER);
+        grid.setAlignment(Pos.TOP_CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(10, 10, 10, 10));
@@ -51,22 +45,35 @@ public class UserInterface extends Application {
         Button button8 = new Button("8");
         Button button9 = new Button("9");
         Button button0 = new Button("0");
+        Button plusButton = new Button(" + ");
+        Button minusButton = new Button(" - ");
+        Button multiButton = new Button(" * ");
+        Button divButton = new Button(" / ");
+        Button equalButton = new Button(" = ");
+        Button cButton = new Button(" C ");
+        Button emptyButton = new Button();
 
-        grid.add(button7, 0, 0);
-        grid.add(button8, 1, 0);
-        grid.add(button9, 2, 0);
-        grid.add(button4, 0, 1);
-        grid.add(button5, 1, 1);
-        grid.add(button6, 2, 1);
-        grid.add(button1, 0, 2);
-        grid.add(button2, 1, 2);
-        grid.add(button3, 2, 2);
-        grid.add(button0, 1, 3);
+        grid.add(button7, 1, 1);
+        grid.add(button8, 2, 1);
+        grid.add(button9, 3, 1);
+        grid.add(button4, 1, 2);
+        grid.add(button5, 2, 2);
+        grid.add(button6, 3, 2);
+        grid.add(button1, 1, 3);
+        grid.add(button2, 2, 3);
+        grid.add(button3, 3, 3);
+        grid.add(button0, 2, 4);
+        grid.add(plusButton, 4, 1);
+        grid.add(minusButton, 4, 2);
+        grid.add(multiButton, 4, 3);
+        grid.add(divButton, 4, 4);
+        grid.add(equalButton, 4, 0);
+        grid.add(cButton, 0, 0);
 
-        layout.setTop(top);
-        layout.setCenter(grid);
+        mainLayout.setTop(top);
+        mainLayout.setCenter(grid);
 
-        Scene scene = new Scene(layout);
+        Scene scene = new Scene(mainLayout);
 
         stage.setScene(scene);
         stage.setTitle("Calculator");
