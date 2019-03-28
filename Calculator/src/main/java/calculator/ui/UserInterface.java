@@ -101,6 +101,9 @@ public class UserInterface extends Application {
     }
 
     public Label addIntoScreen(String s, Label label) {
+        if (label.getText().equals("error")) {
+            label.setText("");
+        }
         label.setText(label.getText() + s);
         return label;
     }
