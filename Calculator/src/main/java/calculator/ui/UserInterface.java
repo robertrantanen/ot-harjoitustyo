@@ -1,5 +1,6 @@
 package calculator.ui;
 
+import calculator.domain.Calculus;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -15,11 +16,12 @@ public class UserInterface extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        Calculus calculator = new Calculus();
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPrefSize(400, 400);
 
-        Label screen = new Label("screen");
+        Label screen = new Label("");
 
         screen.setScaleX(2);
         screen.setScaleY(2);
@@ -45,12 +47,12 @@ public class UserInterface extends Application {
         Button button8 = new Button("8");
         Button button9 = new Button("9");
         Button button0 = new Button("0");
-        Button plusButton = new Button(" + ");
-        Button minusButton = new Button(" - ");
-        Button multiButton = new Button(" * ");
-        Button divButton = new Button(" / ");
-        Button equalButton = new Button(" = ");
-        Button cButton = new Button(" C ");
+        Button plusButton = new Button("+");
+        Button minusButton = new Button("-");
+        Button multiButton = new Button("*");
+        Button divButton = new Button("/");
+        Button equalButton = new Button("=");
+        Button cButton = new Button("C");
         Button emptyButton = new Button();
 
         grid.add(button7, 1, 1);
@@ -70,6 +72,24 @@ public class UserInterface extends Application {
         grid.add(equalButton, 4, 0);
         grid.add(cButton, 0, 0);
 
+        button1.setOnAction(e -> addIntoScreen("1", screen));
+        button2.setOnAction(e -> addIntoScreen("2", screen));
+        button3.setOnAction(e -> addIntoScreen("3", screen));
+        button4.setOnAction(e -> addIntoScreen("4", screen));
+        button5.setOnAction(e -> addIntoScreen("5", screen));
+        button6.setOnAction(e -> addIntoScreen("6", screen));
+        button7.setOnAction(e -> addIntoScreen("7", screen));
+        button8.setOnAction(e -> addIntoScreen("8", screen));
+        button9.setOnAction(e -> addIntoScreen("9", screen));
+        button0.setOnAction(e -> addIntoScreen("0", screen));
+        plusButton.setOnAction(e -> addIntoScreen(" + ", screen));
+        minusButton.setOnAction(e -> addIntoScreen(" - ", screen));
+        multiButton.setOnAction(e -> addIntoScreen(" * ", screen));
+        divButton.setOnAction(e -> addIntoScreen(" / ", screen));
+        cButton.setOnAction(e -> screen.setText(""));
+        equalButton.setOnAction(e -> screen.setText(calculator.calculate(screen.getText())));
+        
+
         mainLayout.setTop(top);
         mainLayout.setCenter(grid);
 
@@ -78,6 +98,11 @@ public class UserInterface extends Application {
         stage.setScene(scene);
         stage.setTitle("Calculator");
         stage.show();
+    }
+
+    public Label addIntoScreen(String s, Label label) {
+        label.setText(label.getText() + s);
+        return label;
     }
 
 }
