@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 public class UserInterface extends Application {
 
+    static boolean limit = false;
+
     @Override
     public void start(Stage stage) throws Exception {
         Calculus calculator = new Calculus();
@@ -72,23 +74,25 @@ public class UserInterface extends Application {
         grid.add(equalButton, 4, 0);
         grid.add(cButton, 0, 0);
 
-        button1.setOnAction(e -> addIntoScreen("1", screen));
-        button2.setOnAction(e -> addIntoScreen("2", screen));
-        button3.setOnAction(e -> addIntoScreen("3", screen));
-        button4.setOnAction(e -> addIntoScreen("4", screen));
-        button5.setOnAction(e -> addIntoScreen("5", screen));
-        button6.setOnAction(e -> addIntoScreen("6", screen));
-        button7.setOnAction(e -> addIntoScreen("7", screen));
-        button8.setOnAction(e -> addIntoScreen("8", screen));
-        button9.setOnAction(e -> addIntoScreen("9", screen));
-        button0.setOnAction(e -> addIntoScreen("0", screen));
-        plusButton.setOnAction(e -> addIntoScreen(" + ", screen));
-        minusButton.setOnAction(e -> addIntoScreen(" - ", screen));
-        multiButton.setOnAction(e -> addIntoScreen(" * ", screen));
-        divButton.setOnAction(e -> addIntoScreen(" / ", screen));
+        button1.setOnAction(e -> addNumberIntoScreen("1", screen));
+        button2.setOnAction(e -> addNumberIntoScreen("2", screen));
+        button3.setOnAction(e -> addNumberIntoScreen("3", screen));
+        button4.setOnAction(e -> addNumberIntoScreen("4", screen));
+        button5.setOnAction(e -> addNumberIntoScreen("5", screen));
+        button6.setOnAction(e -> addNumberIntoScreen("6", screen));
+        button7.setOnAction(e -> addNumberIntoScreen("7", screen));
+        button8.setOnAction(e -> addNumberIntoScreen("8", screen));
+        button9.setOnAction(e -> addNumberIntoScreen("9", screen));
+        button0.setOnAction(e -> addNumberIntoScreen("0", screen));
+        plusButton.setOnAction(e -> addStringIntoScreen(" + ", screen));
+        minusButton.setOnAction(e -> addStringIntoScreen(" - ", screen));
+        multiButton.setOnAction(e -> addStringIntoScreen(" * ", screen));
+        divButton.setOnAction(e -> addStringIntoScreen(" / ", screen));
         cButton.setOnAction(e -> screen.setText(""));
-        equalButton.setOnAction(e -> screen.setText(calculator.calculate(screen.getText())));
-        
+        equalButton.setOnAction(e -> {
+            screen.setText(calculator.calculate(screen.getText()));
+            limit = false;
+                });
 
         mainLayout.setTop(top);
         mainLayout.setCenter(grid);
@@ -100,11 +104,22 @@ public class UserInterface extends Application {
         stage.show();
     }
 
-    public Label addIntoScreen(String s, Label label) {
+    public Label addNumberIntoScreen(String s, Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }
         label.setText(label.getText() + s);
+        return label;
+    }
+
+    public Label addStringIntoScreen(String s, Label label) {
+        if (label.getText().equals("error")) {
+            label.setText("");
+        }
+        if (!label.getText().equals("") && !limit) {
+            label.setText(label.getText() + s);
+            limit = true;
+        }
         return label;
     }
 
