@@ -88,11 +88,14 @@ public class UserInterface extends Application {
         minusButton.setOnAction(e -> addStringIntoScreen(" - ", screen));
         multiButton.setOnAction(e -> addStringIntoScreen(" * ", screen));
         divButton.setOnAction(e -> addStringIntoScreen(" / ", screen));
-        cButton.setOnAction(e -> screen.setText(""));
+        cButton.setOnAction(e -> {
+            screen.setText("");
+            limit = false;
+        });
         equalButton.setOnAction(e -> {
             screen.setText(calculator.calculate(screen.getText()));
             limit = false;
-                });
+        });
 
         mainLayout.setTop(top);
         mainLayout.setCenter(grid);
