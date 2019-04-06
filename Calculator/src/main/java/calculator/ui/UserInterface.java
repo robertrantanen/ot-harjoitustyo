@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -55,7 +56,7 @@ public class UserInterface extends Application {
         Button divButton = new Button("/");
         Button equalButton = new Button("=");
         Button cButton = new Button("C");
-        Button emptyButton = new Button();
+        Button historyButton = new Button("History");
 
         grid.add(button7, 1, 1);
         grid.add(button8, 2, 1);
@@ -97,12 +98,37 @@ public class UserInterface extends Application {
             limit = false;
         });
 
+        FlowPane history = new FlowPane();
+        history.getChildren().add(historyButton);
         mainLayout.setTop(top);
         mainLayout.setCenter(grid);
+        mainLayout.setBottom(history);
+        historyButton.setScaleX(1.5);
+        historyButton.setScaleY(1.5);
+        history.setPadding(new Insets(20, 20, 20, 20));
 
-        Scene scene = new Scene(mainLayout);
+        Scene mainScene = new Scene(mainLayout);
 
-        stage.setScene(scene);
+        BorderPane historyLayout = new BorderPane();
+        historyLayout.setPrefSize(400, 400);
+        Label l = new Label("1 + 1 = 2");
+        StackPane historyCenter = new StackPane();
+        historyLayout.setCenter(historyCenter);
+        historyCenter.getChildren().add(l);
+        Button backButton = new Button("Back");
+        backButton.setScaleX(1.5);
+        backButton.setScaleY(1.5);
+        FlowPane back = new FlowPane();
+        back.getChildren().add(backButton);
+        back.setPadding(new Insets(20, 20, 20, 20));
+        historyLayout.setBottom(back);
+        
+        Scene historyScene = new Scene(historyLayout);
+        
+        historyButton.setOnAction(e -> stage.setScene(historyScene));
+        backButton.setOnAction(e -> stage.setScene(mainScene));
+
+        stage.setScene(mainScene);
         stage.setTitle("Calculator");
         stage.show();
     }
