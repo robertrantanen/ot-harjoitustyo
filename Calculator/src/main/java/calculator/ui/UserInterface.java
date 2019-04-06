@@ -1,6 +1,7 @@
 package calculator.ui;
 
 import calculator.domain.Calculus;
+import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 public class UserInterface extends Application {
 
     static boolean limit = false;
+    ArrayList<Button> buttons = new ArrayList<>();
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -36,27 +38,51 @@ public class UserInterface extends Application {
         GridPane grid = new GridPane();
 
         grid.setAlignment(Pos.TOP_CENTER);
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setHgap(20);
+        grid.setVgap(20);
+        grid.setPadding(new Insets(20, 20, 20, 20));
 
         Button button1 = new Button("1");
+        buttons.add(button1);
         Button button2 = new Button("2");
+        buttons.add(button2);
         Button button3 = new Button("3");
+        buttons.add(button3);
         Button button4 = new Button("4");
+        buttons.add(button4);
         Button button5 = new Button("5");
+        buttons.add(button5);
         Button button6 = new Button("6");
+        buttons.add(button6);
         Button button7 = new Button("7");
+        buttons.add(button7);
         Button button8 = new Button("8");
+        buttons.add(button8);
         Button button9 = new Button("9");
+        buttons.add(button9);
         Button button0 = new Button("0");
+        buttons.add(button0);
         Button plusButton = new Button("+");
+        buttons.add(plusButton);
         Button minusButton = new Button("-");
+        buttons.add(minusButton);
         Button multiButton = new Button("*");
+        buttons.add(multiButton);
         Button divButton = new Button("/");
+        buttons.add(divButton);
         Button equalButton = new Button("=");
+        buttons.add(equalButton);
         Button cButton = new Button("C");
+        buttons.add(cButton);
         Button historyButton = new Button("History");
+        buttons.add(historyButton);
+        Button backButton = new Button("Back");
+        buttons.add(backButton);
+        
+        for (Button button : buttons) {
+            button.setScaleX(1.5);
+            button.setScaleY(1.5);
+        }
 
         grid.add(button7, 1, 1);
         grid.add(button8, 2, 1);
@@ -103,29 +129,29 @@ public class UserInterface extends Application {
         mainLayout.setTop(top);
         mainLayout.setCenter(grid);
         mainLayout.setBottom(history);
-        historyButton.setScaleX(1.5);
-        historyButton.setScaleY(1.5);
         history.setPadding(new Insets(20, 20, 20, 20));
 
         Scene mainScene = new Scene(mainLayout);
 
         BorderPane historyLayout = new BorderPane();
         historyLayout.setPrefSize(400, 400);
-        Label l = new Label("1 + 1 = 2");
+        Label historyLabel = new Label();
+        historyLabel.setScaleX(2);
+        historyLabel.setScaleY(2);
         StackPane historyCenter = new StackPane();
         historyLayout.setCenter(historyCenter);
-        historyCenter.getChildren().add(l);
-        Button backButton = new Button("Back");
-        backButton.setScaleX(1.5);
-        backButton.setScaleY(1.5);
+        historyCenter.getChildren().add(historyLabel);
         FlowPane back = new FlowPane();
         back.getChildren().add(backButton);
         back.setPadding(new Insets(20, 20, 20, 20));
         historyLayout.setBottom(back);
-        
+
         Scene historyScene = new Scene(historyLayout);
-        
-        historyButton.setOnAction(e -> stage.setScene(historyScene));
+
+        historyButton.setOnAction(e -> {
+            stage.setScene(historyScene);
+            historyLabel.setText(calculator.getLastItemsFromHistoryList());
+                });
         backButton.setOnAction(e -> stage.setScene(mainScene));
 
         stage.setScene(mainScene);
