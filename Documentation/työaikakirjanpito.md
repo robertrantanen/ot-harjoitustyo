@@ -6,5 +6,6 @@
 | 24.3. | 4    | javaFX:n kertaus ja graafisen käyttöliittymän aloitus |
 | 28.3. | 2    | vähän sovelluslogiikkaa |
 | 31.3. | 2    | testejä ja perustoiminnallisuus kuntoon |
-| yht   | 9    | | 
+| 6.4.  | 4    | simppeli historia ja muita toiminnallisuuksia |
+| yht   | 13   | | 
 

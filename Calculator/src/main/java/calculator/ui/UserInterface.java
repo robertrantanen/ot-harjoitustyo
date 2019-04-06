@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 public class UserInterface extends Application {
 
     static boolean limit = false;
+    static boolean dotLimit = false;
+    static boolean negLimit = false;
     ArrayList<Button> buttons = new ArrayList<>();
 
     @Override
@@ -78,7 +80,15 @@ public class UserInterface extends Application {
         buttons.add(historyButton);
         Button backButton = new Button("Back");
         buttons.add(backButton);
-        
+        Button eraseButton = new Button("<-");
+        buttons.add(eraseButton);
+        Button ansButton = new Button("ans");
+        buttons.add(ansButton);
+        Button dotButton = new Button(" . ");
+        buttons.add(dotButton);
+        Button negButton = new Button("neg");
+        buttons.add(negButton);
+
         for (Button button : buttons) {
             button.setScaleX(1.5);
             button.setScaleY(1.5);
@@ -99,7 +109,11 @@ public class UserInterface extends Application {
         grid.add(multiButton, 4, 3);
         grid.add(divButton, 4, 4);
         grid.add(equalButton, 4, 0);
-        grid.add(cButton, 0, 0);
+        grid.add(cButton, 1, 0);
+        grid.add(eraseButton, 3, 0);
+        grid.add(ansButton, 2, 0);
+        grid.add(dotButton, 3, 4);
+        grid.add(negButton, 1, 4);
 
         button1.setOnAction(e -> addNumberIntoScreen("1", screen));
         button2.setOnAction(e -> addNumberIntoScreen("2", screen));
@@ -118,11 +132,20 @@ public class UserInterface extends Application {
         cButton.setOnAction(e -> {
             screen.setText("");
             limit = false;
+            dotLimit = false;
+            negLimit = false;
         });
         equalButton.setOnAction(e -> {
             screen.setText(calculator.calculate(screen.getText()));
             limit = false;
+            dotLimit = false;
         });
+        ansButton.setOnAction(e -> {
+            addNumberIntoScreen(calculator.getLast(), screen);
+        });
+        eraseButton.setOnAction(e -> removeLast(screen));
+        dotButton.setOnAction(e -> addDot(screen));
+        negButton.setOnAction(e -> negative(screen));
 
         FlowPane history = new FlowPane();
         history.getChildren().add(historyButton);
@@ -151,7 +174,7 @@ public class UserInterface extends Application {
         historyButton.setOnAction(e -> {
             stage.setScene(historyScene);
             historyLabel.setText(calculator.getLastItemsFromHistoryList());
-                });
+        });
         backButton.setOnAction(e -> stage.setScene(mainScene));
 
         stage.setScene(mainScene);
@@ -164,6 +187,7 @@ public class UserInterface extends Application {
             label.setText("");
         }
         label.setText(label.getText() + s);
+        negLimit = true;
         return label;
     }
 
@@ -174,7 +198,60 @@ public class UserInterface extends Application {
         if (!label.getText().equals("") && !limit) {
             label.setText(label.getText() + s);
             limit = true;
+            negLimit = false;
+            dotLimit = false;
         }
+        return label;
+    }
+
+    public Label addDot(Label label) {
+        if (label.getText().equals("error")) {
+            label.setText("");
+        }
+        if (!dotLimit) {
+            label.setText(label.getText() + ".");
+            dotLimit = true;
+        }
+
+        return label;
+    }
+
+    public Label negative(Label label) {
+        if (label.getText().equals("error")) {
+            label.setText("");
+        }
+        if (!negLimit || label.getText().equals("")) {
+            label.setText(label.getText() + "-");
+            negLimit = true;
+        }
+
+        return label;
+    }
+
+    public Label removeLast(Label label) {
+        if (label.getText().equals("error")) {
+            label.setText("");
+        }
+        String s = label.getText();
+        if (s.length() == 0) {
+            return label;
+        }
+
+        String last = String.valueOf(s.charAt(s.length() - 1));
+
+        if (last.equals(" ")) {
+            label.setText(s.substring(0, s.length() - 3));
+            this.limit = false;
+        } else {
+            if (last.equals(".")) {
+                dotLimit = false;
+            }
+            if (last.equals("-")) {
+                negLimit = false;
+            }
+            label.setText(s.substring(0, s.length() - 1));
+        }
+
         return label;
     }
 
