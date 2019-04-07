@@ -7,5 +7,6 @@
 | 28.3. | 2    | vähän sovelluslogiikkaa |
 | 31.3. | 2    | testejä ja perustoiminnallisuus kuntoon |
 | 6.4.  | 4    | simppeli historia ja muita toiminnallisuuksia |
-| yht   | 13   | | 
+| 7.4.  | 1    | checkstyle ja lisää testejä |
+| yht   | 14   | | 
 
