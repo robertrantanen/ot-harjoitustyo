@@ -5,3 +5,5 @@ Käyttäjä pystyy tekemään matemaattisia laskutoimituksia sovelluksen avulla.
 
 [Työaikakirjanpito](https://github.com/robertrantanen/ot-harjoitustyo/blob/master/Documentation/ty%C3%B6aikakirjanpito.md)
 
+[Arkkitehtuurikuvaus](https://github.com/robertrantanen/ot-harjoitustyo/blob/master/Documentation/arkkitehtuuri.md)
+
