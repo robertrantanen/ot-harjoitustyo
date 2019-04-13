@@ -2,6 +2,8 @@ package calculator.ui;
 
 import calculator.domain.Calculus;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -136,7 +138,11 @@ public class UserInterface extends Application {
             negLimit = false;
         });
         equalButton.setOnAction(e -> {
-            screen.setText(calculator.calculate(screen.getText()));
+            try {
+                screen.setText(calculator.calculate(screen.getText()));
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
             limit = false;
             dotLimit = false;
         });
@@ -173,7 +179,11 @@ public class UserInterface extends Application {
 
         historyButton.setOnAction(e -> {
             stage.setScene(historyScene);
-            historyLabel.setText(calculator.getLastItemsFromHistoryList());
+            try {
+                historyLabel.setText(calculator.getLastItemsFromHistoryList());
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
         backButton.setOnAction(e -> stage.setScene(mainScene));
 

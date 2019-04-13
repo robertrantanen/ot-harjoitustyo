@@ -1,5 +1,6 @@
 package calculator.domain;
 
+import calculator.dao.HistoryDao;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,15 @@ public class Calculus {
 
     ArrayList<String> historyList;
     String last;
+    HistoryDao historydao;
 
-    public Calculus() {
+    public Calculus() throws Exception {
         historyList = new ArrayList<>();
         last = "";
+        historydao = new HistoryDao();
     }
 
-    public String calculate(String s) {
+    public String calculate(String s) throws Exception {
 
         String parts[] = s.split(" ");
         if (parts.length < 3) {
@@ -46,19 +49,20 @@ public class Calculus {
         }
                 
         
-        historyList.add(s + " = " + answerString);
+//        historyList.add(s + " = " + answerString);
+        historydao.addItem(s + " = " + answerString);
         last = answerString;
         return answerString;
 
     }
 
-    public String getLastItemsFromHistoryList() {
-        List<String> list;
-        if (this.historyList.size() < 10) {
-            list = this.historyList;
-        } else {
-            list = this.historyList.subList(this.historyList.size() - 10, this.historyList.size());
-        }
+    public String getLastItemsFromHistoryList() throws Exception {
+        List<String> list = historydao.listAll();
+//        if (this.historyList.size() < 10) {
+//            list = this.historyList;
+//        } else {
+//            list = this.historyList.subList(this.historyList.size() - 10, this.historyList.size());
+//        }
 
         String s = "";
 
