@@ -2,6 +2,7 @@ package calculator.domain;
 
 import calculator.dao.HistoryDao;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Calculus {
@@ -46,23 +47,17 @@ public class Calculus {
         
         if (lastChar.equals("0") && secondLastChar.equals(".")) {
             answerString = answerString.substring(0, answerString.length() - 2);
-        }
-                
+        }          
         
-//        historyList.add(s + " = " + answerString);
         historydao.addItem(s + " = " + answerString);
         last = answerString;
         return answerString;
 
     }
 
-    public String getLastItemsFromHistoryList() throws Exception {
+    public String getLastItemsFromHistory() throws Exception {
         List<String> list = historydao.listAll();
-//        if (this.historyList.size() < 10) {
-//            list = this.historyList;
-//        } else {
-//            list = this.historyList.subList(this.historyList.size() - 10, this.historyList.size());
-//        }
+        Collections.reverse(list);
 
         String s = "";
 
@@ -71,6 +66,10 @@ public class Calculus {
         }
 
         return s;
+    }
+    
+    public void deleteHistory() throws Exception {
+        historydao.deleteAll();
     }
 
     public String getLast() {

@@ -90,6 +90,8 @@ public class UserInterface extends Application {
         buttons.add(dotButton);
         Button negButton = new Button("neg");
         buttons.add(negButton);
+        Button delButton = new Button("Delete");
+        buttons.add(delButton);
 
         for (Button button : buttons) {
             button.setScaleX(1.5);
@@ -170,22 +172,31 @@ public class UserInterface extends Application {
         StackPane historyCenter = new StackPane();
         historyLayout.setCenter(historyCenter);
         historyCenter.getChildren().add(historyLabel);
-        FlowPane back = new FlowPane();
-        back.getChildren().add(backButton);
-        back.setPadding(new Insets(20, 20, 20, 20));
-        historyLayout.setBottom(back);
+        BorderPane bottom = new BorderPane();
+        bottom.setLeft(backButton);
+        bottom.setRight(delButton);
+        bottom.setPadding(new Insets(20, 20, 20, 20));
+        historyLayout.setBottom(bottom);
 
         Scene historyScene = new Scene(historyLayout);
 
         historyButton.setOnAction(e -> {
             stage.setScene(historyScene);
             try {
-                historyLabel.setText(calculator.getLastItemsFromHistoryList());
+                historyLabel.setText(calculator.getLastItemsFromHistory());
             } catch (Exception ex) {
                 Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
         backButton.setOnAction(e -> stage.setScene(mainScene));
+        delButton.setOnAction(e -> {
+            historyLabel.setText("");
+            try {
+                calculator.deleteHistory();
+            } catch (Exception ex) {
+                Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
 
         stage.setScene(mainScene);
         stage.setTitle("Calculator");

@@ -13,75 +13,78 @@ public class CalculusTest {
     Calculus calculator;
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         calculator = new Calculus();
     }
 
     @Test
-    public void plusWorks() {
+    public void plusWorks() throws Exception {
         assertEquals("2", calculator.calculate("1 + 1"));
     }
 
     @Test
-    public void minusWorks() {
+    public void minusWorks() throws Exception {
         assertEquals("1", calculator.calculate("3 - 2"));
     }
 
     @Test
-    public void multiplyWorks() {
+    public void multiplyWorks() throws Exception {
         assertEquals("30", calculator.calculate("5 * 6"));
     }
 
     @Test
-    public void divideWorks() {
+    public void divideWorks() throws Exception {
         assertEquals("0.5", calculator.calculate("1 / 2"));
     }
 
     @Test
-    public void cantDivideWithZero() {
+    public void cantDivideWithZero() throws Exception {
         assertEquals("error", calculator.calculate("1 / 0"));
     }
 
     @Test
-    public void emptyRemainsEmpty() {
+    public void emptyRemainsEmpty() throws Exception {
         assertEquals("", calculator.calculate(""));
     }
 
     @Test
-    public void decimalsWork() {
+    public void decimalsWork() throws Exception {
         assertEquals("1.11", calculator.calculate("1.1 + .01"));
     }
 
     @Test
-    public void properErrorMessage() {
+    public void properErrorMessage() throws Exception {
         assertEquals("error", calculator.calculate(". + -"));
     }
 
     @Test
-    public void getLastWorks() {
+    public void getLastWorks() throws Exception {
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
         assertEquals("4", calculator.getLast());
     }
 
     @Test
-    public void getLastItemsFromHistoryListWorks() {
+    public void getLastItemsFromHistoryListWorks() throws Exception {
+        calculator.deleteHistory();
         calculator.calculate("1 + 1");
-        assertEquals("1 + 1 = 2" + "\n", calculator.getLastItemsFromHistoryList());
+        assertEquals("1 + 1 = 2" + "\n", calculator.getLastItemsFromHistory());
     }
 
     @Test
-    public void getLastItemsFromHistoryListWithMultipleItems() {
+    public void getLastItemsFromHistoryListWithMultipleItems() throws Exception {
+        calculator.deleteHistory();
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
         calculator.calculate("3 + 3");
         assertEquals("1 + 1 = 2" + "\n"
                 + "2 + 2 = 4" + "\n"
-                + "3 + 3 = 6" + "\n", calculator.getLastItemsFromHistoryList());
+                + "3 + 3 = 6" + "\n", calculator.getLastItemsFromHistory());
     }
 
     @Test
-    public void getLastItemsFromHistoryListWitOver10Items() {
+    public void getLastItemsFromHistoryListWitOver10Items() throws Exception {
+        calculator.deleteHistory();
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
         calculator.calculate("3 + 3");
@@ -102,7 +105,14 @@ public class CalculusTest {
                 + "8 + 8 = 16" + "\n"
                 + "9 + 9 = 18" + "\n"
                 + "10 + 10 = 20" + "\n"
-                + "11 + 11 = 22" + "\n", calculator.getLastItemsFromHistoryList());
+                + "11 + 11 = 22" + "\n", calculator.getLastItemsFromHistory());
+    }
+
+    @Test
+    public void deleteHistoryWorks() throws Exception {
+        calculator.calculate("1 + 1");
+        calculator.deleteHistory();
+        assertEquals("", calculator.getLastItemsFromHistory());
     }
 
 }

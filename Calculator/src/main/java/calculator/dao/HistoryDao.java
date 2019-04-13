@@ -12,7 +12,7 @@ public class HistoryDao {
     public List<String> listAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
-        PreparedStatement stmt = connection.prepareStatement("SELECT item FROM History");
+        PreparedStatement stmt = connection.prepareStatement("SELECT item FROM History ORDER BY id DESC LIMIT 10");
         ResultSet rs = stmt.executeQuery();
 
         List<String> items = new ArrayList<>();
@@ -37,6 +37,19 @@ public class HistoryDao {
         PreparedStatement stmt
                 = connection.prepareStatement("INSERT INTO History (item) VALUES (?)");
         stmt.setString(1, item);
+
+        stmt.executeUpdate();
+
+        stmt.close();
+        connection.close();
+
+    }
+
+    public void deleteAll() throws Exception {
+        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+
+        PreparedStatement stmt
+                = connection.prepareStatement("DELETE FROM History");
 
         stmt.executeUpdate();
 
