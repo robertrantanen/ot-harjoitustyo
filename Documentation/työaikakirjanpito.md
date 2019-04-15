@@ -9,5 +9,6 @@
 | 6.4.  | 4    | simppeli historia ja muita toiminnallisuuksia |
 | 7.4.  | 1    | checkstyle ja lisää testejä |
 | 13.4. | 5    | H2-tietokannan harjoittelu ja käyttöönotto |
+| 15.4. | 1    | jar-tiedosto ja release, ongelmia niiden kanssa |
 | yht   | 19   | | 
 
