@@ -7,3 +7,48 @@ Käyttäjä pystyy tekemään matemaattisia laskutoimituksia sovelluksen avulla.
 
 [Arkkitehtuurikuvaus](https://github.com/robertrantanen/ot-harjoitustyo/blob/master/Documentation/arkkitehtuuri.md)
 
+## Releaset
+
+[Viikko5](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.0)
+
+## Komentorivitoiminnot
+Komennot tehdään sovelluksen juurikansiossa, el siinä missä on tiedosto pom.xml.
+
+### Testaus
+
+Testit suoritetaan kirjoittamalla komento
+
+```
+mvn test
+```
+
+Testikattavuusraportti tehdään komennolla
+
+```
+mvn jacoco:report
+```
+
+Raporttia voi tarkastella internetselaimella avaamalla tiedoston _target/site/jacoco/index.html_.
+
+### Suoritettavan jarin generointi
+
+Komento
+
+```
+mvn package
+```
+
+luo kansioon _target_ suoritettavan jar-tiedoston _Calculator-1.0-SNAPSHOT.jar_. Sovellus ei kuitenkaan toimi target-kansiossa, sillä se ei pääse käyttämään tarvittavia tietokantatauluja. jar-tiedosto pitää siirtää juurikansioon ensin.
+
+
+### Checkstyle
+
+Checkstylen määrittelemät tarkistukset suoritetaan komennolla
+
+```
+ mvn jxr:jxr checkstyle:checkstyle
+```
+
+Raporttia voi tarkastella internetselaimella avaamalla tiedoston _target/site/checkstyle.html_.
+
+
