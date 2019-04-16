@@ -38,6 +38,16 @@ public class CalculusTest {
     }
 
     @Test
+    public void powWorks() throws Exception {
+        assertEquals("27", calculator.calculate("3 ^ 3"));
+    }
+
+    @Test
+    public void rootWorks() throws Exception {
+        assertEquals("3", calculator.calculate("27 root 3"));
+    }
+
+    @Test
     public void cantDivideWithZero() throws Exception {
         assertEquals("error", calculator.calculate("1 / 0"));
     }

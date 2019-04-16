@@ -40,15 +40,21 @@ public class Calculus {
                 return "error";
             }
             answer = first / second;
+        } else if (parts[1].equals("^")) {
+            answer = Math.pow(first, second);
+        } else if (parts[1].equals("root")) {
+            second = 1 / second;
+            answer = Math.pow(first, second);
         }
+        answer = (double) Math.round(answer * 100000d) / 100000d;
         String answerString = String.valueOf(answer);
         String lastChar = String.valueOf(answerString.charAt(answerString.length() - 1));
         String secondLastChar = String.valueOf(answerString.charAt(answerString.length() - 2));
-        
+
         if (lastChar.equals("0") && secondLastChar.equals(".")) {
             answerString = answerString.substring(0, answerString.length() - 2);
-        }          
-        
+        }
+
         historydao.addItem(s + " = " + answerString);
         last = answerString;
         return answerString;
@@ -67,7 +73,7 @@ public class Calculus {
 
         return s;
     }
-    
+
     public void deleteHistory() throws Exception {
         historydao.deleteAll();
     }

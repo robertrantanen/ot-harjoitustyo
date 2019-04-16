@@ -28,7 +28,7 @@ public class UserInterface extends Application {
         Calculus calculator = new Calculus();
 
         BorderPane mainLayout = new BorderPane();
-        mainLayout.setPrefSize(400, 400);
+        mainLayout.setPrefSize(450, 450);
 
         Label screen = new Label("");
 
@@ -74,6 +74,10 @@ public class UserInterface extends Application {
         buttons.add(multiButton);
         Button divButton = new Button("/");
         buttons.add(divButton);
+        Button powButton = new Button("^");
+        buttons.add(powButton);
+        Button rootButton = new Button("root");
+        buttons.add(rootButton);
         Button equalButton = new Button("=");
         buttons.add(equalButton);
         Button cButton = new Button("C");
@@ -92,7 +96,7 @@ public class UserInterface extends Application {
         buttons.add(negButton);
         Button delButton = new Button("Delete");
         buttons.add(delButton);
-
+        
         for (Button button : buttons) {
             button.setScaleX(1.5);
             button.setScaleY(1.5);
@@ -112,6 +116,8 @@ public class UserInterface extends Application {
         grid.add(minusButton, 4, 2);
         grid.add(multiButton, 4, 3);
         grid.add(divButton, 4, 4);
+        grid.add(powButton, 5, 3);
+        grid.add(rootButton, 5, 4);
         grid.add(equalButton, 4, 0);
         grid.add(cButton, 1, 0);
         grid.add(eraseButton, 3, 0);
@@ -133,6 +139,8 @@ public class UserInterface extends Application {
         minusButton.setOnAction(e -> addStringIntoScreen(" - ", screen));
         multiButton.setOnAction(e -> addStringIntoScreen(" * ", screen));
         divButton.setOnAction(e -> addStringIntoScreen(" / ", screen));
+        powButton.setOnAction(e -> addStringIntoScreen(" ^ ", screen));
+        rootButton.setOnAction(e -> addStringIntoScreen(" root ", screen));
         cButton.setOnAction(e -> {
             screen.setText("");
             limit = false;
@@ -165,7 +173,7 @@ public class UserInterface extends Application {
         Scene mainScene = new Scene(mainLayout);
 
         BorderPane historyLayout = new BorderPane();
-        historyLayout.setPrefSize(400, 400);
+        historyLayout.setPrefSize(450, 450);
         Label historyLabel = new Label();
         historyLabel.setScaleX(2);
         historyLabel.setScaleY(2);
