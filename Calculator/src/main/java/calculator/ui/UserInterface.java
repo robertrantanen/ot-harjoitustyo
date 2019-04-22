@@ -211,7 +211,7 @@ public class UserInterface extends Application {
         stage.show();
     }
 
-    public Label addNumberIntoScreen(String s, Label label) {
+    private Label addNumberIntoScreen(String s, Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }
@@ -220,7 +220,7 @@ public class UserInterface extends Application {
         return label;
     }
 
-    public Label addStringIntoScreen(String s, Label label) {
+    private Label addStringIntoScreen(String s, Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }
@@ -233,7 +233,7 @@ public class UserInterface extends Application {
         return label;
     }
 
-    public Label addDot(Label label) {
+    private Label addDot(Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }
@@ -245,7 +245,7 @@ public class UserInterface extends Application {
         return label;
     }
 
-    public Label negative(Label label) {
+    private Label negative(Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }
@@ -257,7 +257,7 @@ public class UserInterface extends Application {
         return label;
     }
 
-    public Label removeLast(Label label) {
+    private Label removeLast(Label label) {
         if (label.getText().equals("error")) {
             label.setText("");
         }

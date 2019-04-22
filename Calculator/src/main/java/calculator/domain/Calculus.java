@@ -1,22 +1,36 @@
 package calculator.domain;
 
 import calculator.dao.HistoryDao;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Luokka vastaa laskutoimitusten laskemisesta ja historianäkymästä
+ */
 public class Calculus {
 
-    ArrayList<String> historyList;
     String last;
     HistoryDao historydao;
 
+    /**
+     * Konstruktori luo "last"-oliomuuttujan tyhjällä merkkijonolla sekä HistoryDao-olion.
+     */
     public Calculus() throws Exception {
-        historyList = new ArrayList<>();
         last = "";
         historydao = new HistoryDao();
     }
 
+    /**
+     * Metodi muuttaa merkkijonomuotoisen laskutoimituksen laskettavaan muotoon, laskee sen ja palauttaa vastauksen sekä tallentaa sen "last"-oliomuuttujaan.
+     * Vastaus pyöristetään viiden desimaalin tarkkuuteen ja kokonaisluvuista karsitaan desimaalipiste pois.
+     * Metodi vastaa myös laskutoimituksen lisäämisestä historiaan kutsumalla HistoryDao-luokan add-metodia.
+     *
+     * @param s laskimen näytössä oleva merkkijono
+     * 
+     * @see calculator.dao.HistoryDao#addItem(java.lang.String) 
+     *
+     * @return laskun vastaus merkkijonona, tai merkkijono "error" jos lasku ei ollut validi
+     */
     public String calculate(String s) throws Exception {
 
         String parts[] = s.split(" ");
@@ -61,6 +75,14 @@ public class Calculus {
 
     }
 
+/**
+ * Metodi luo listan HistodyDao:n listAll-metodilla ja muuttaa sen merkkijonomuotoon.
+ * Lista laitetaan myös käänteiseen järjestykseen, jotta uusin laskutoimitus on ruudun alareunassa.
+ * 
+ * @see calculator.dao.HistoryDao#listAll() 
+ * 
+ * @return historialista merkkijonomuodossa, jokainen laskutoimitus omalla rivillään
+ */
     public String getLastItemsFromHistory() throws Exception {
         List<String> list = historydao.listAll();
         Collections.reverse(list);
@@ -74,10 +96,21 @@ public class Calculus {
         return s;
     }
 
+    /**
+     * Metodi kutsuu HistoryDao:n metodia deleteAll.
+     * 
+     * @see calculator.dao.HistoryDao#deleteAll() 
+     * 
+     */
     public void deleteHistory() throws Exception {
         historydao.deleteAll();
     }
 
+    /**
+     * Metodi palauttaa "last"-oliomuuttujan
+     * 
+     * @return viimeisimmän laskutoimituksen vastaus merkkijonomuodossa
+     */
     public String getLast() {
         return last;
     }
