@@ -5,7 +5,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Luokka vastaa laskutoimitusten laskemisesta ja historianäkymästä
+ * Luokka vastaa laskutoimitusten laskemisesta ja historianäkymästä.
  */
 public class Calculus {
 

@@ -7,8 +7,16 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Luokka vastaa tietokantaoperaatioista.
+ */
 public class HistoryDao {
 
+    /**
+     * Metodi ottaa yhteyden tietokantaan ja luo listan tietokantakyselyn tuloksesta.
+     * 
+     * @return History-taulun 10 viimeisintä riviä listana.
+     */
     public List<String> listAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
@@ -31,6 +39,11 @@ public class HistoryDao {
 
     }
 
+    /** 
+     * Metodi ottaa yhteyden tietokantaan ja lisää History-tauluun uuden rivin.
+     * 
+     * @param item Calculus-luokan calculate-metodin antama merkkijono laskutoimituksesta.
+     */
     public void addItem(String item) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
@@ -45,6 +58,9 @@ public class HistoryDao {
 
     }
 
+    /**
+     * Metodi poistaa kaikki rivit History-taulusta.
+     */
     public void deleteAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 

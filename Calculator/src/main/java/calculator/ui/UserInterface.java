@@ -16,6 +16,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+/**
+ * Luokka vastaa graafisesta käyttöliittymästä.
+ */
 public class UserInterface extends Application {
 
     static boolean limit = false;
