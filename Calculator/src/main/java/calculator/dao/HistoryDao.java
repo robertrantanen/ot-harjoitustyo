@@ -47,8 +47,7 @@ public class HistoryDao {
     public void addItem(String item) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
-        PreparedStatement stmt
-                = connection.prepareStatement("INSERT INTO History (item) VALUES (?)");
+        PreparedStatement stmt = connection.prepareStatement("INSERT INTO History (item) VALUES (?)");
         stmt.setString(1, item);
 
         stmt.executeUpdate();
@@ -64,8 +63,7 @@ public class HistoryDao {
     public void deleteAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
-        PreparedStatement stmt
-                = connection.prepareStatement("DELETE FROM History");
+        PreparedStatement stmt = connection.prepareStatement("DELETE FROM History");
 
         stmt.executeUpdate();
 

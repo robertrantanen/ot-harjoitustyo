@@ -24,6 +24,7 @@ public class UserInterface extends Application {
     static boolean limit = false;
     static boolean dotLimit = false;
     static boolean negLimit = false;
+    static boolean trigLimit = false;
     ArrayList<Button> buttons = new ArrayList<>();
 
     @Override
@@ -99,7 +100,13 @@ public class UserInterface extends Application {
         buttons.add(negButton);
         Button delButton = new Button("Delete");
         buttons.add(delButton);
-        
+        Button sinButton = new Button("sin");
+        buttons.add(sinButton);
+        Button cosButton = new Button("cos");
+        buttons.add(cosButton);
+        Button tanButton = new Button("tan");
+        buttons.add(tanButton);
+
         for (Button button : buttons) {
             button.setScaleX(1.5);
             button.setScaleY(1.5);
@@ -119,14 +126,17 @@ public class UserInterface extends Application {
         grid.add(minusButton, 4, 2);
         grid.add(multiButton, 4, 3);
         grid.add(divButton, 4, 4);
-        grid.add(powButton, 5, 3);
-        grid.add(rootButton, 5, 4);
+        grid.add(powButton, 5, 1);
+        grid.add(rootButton, 5, 2);
         grid.add(equalButton, 4, 0);
         grid.add(cButton, 1, 0);
         grid.add(eraseButton, 3, 0);
         grid.add(ansButton, 2, 0);
         grid.add(dotButton, 3, 4);
         grid.add(negButton, 1, 4);
+        grid.add(sinButton, 5, 3);
+        grid.add(cosButton, 5, 4);
+        grid.add(tanButton, 5, 5);
 
         button1.setOnAction(e -> addNumberIntoScreen("1", screen));
         button2.setOnAction(e -> addNumberIntoScreen("2", screen));
@@ -144,20 +154,29 @@ public class UserInterface extends Application {
         divButton.setOnAction(e -> addStringIntoScreen(" / ", screen));
         powButton.setOnAction(e -> addStringIntoScreen(" ^ ", screen));
         rootButton.setOnAction(e -> addStringIntoScreen(" root ", screen));
+        sinButton.setOnAction(e -> addTrigonometricIntoScreen("sin", screen));
+        cosButton.setOnAction(e -> addTrigonometricIntoScreen("cos", screen));
+        tanButton.setOnAction(e -> addTrigonometricIntoScreen("tan", screen));
         cButton.setOnAction(e -> {
             screen.setText("");
             limit = false;
             dotLimit = false;
             negLimit = false;
+            trigLimit = false;
         });
         equalButton.setOnAction(e -> {
             try {
-                screen.setText(calculator.calculate(screen.getText()));
+                if (!trigLimit) {
+                    screen.setText(calculator.calculate(screen.getText()));
+                } else {
+                    screen.setText(calculator.calculateTrigonometric(screen.getText()));
+                }
             } catch (Exception ex) {
                 Logger.getLogger(UserInterface.class.getName()).log(Level.SEVERE, null, ex);
             }
             limit = false;
             dotLimit = false;
+            trigLimit = false;
         });
         ansButton.setOnAction(e -> {
             addNumberIntoScreen(calculator.getLast(), screen);
@@ -218,8 +237,35 @@ public class UserInterface extends Application {
         if (label.getText().equals("error")) {
             label.setText("");
         }
-        label.setText(label.getText() + s);
+        String l = label.getText();
+        String lastChar = "";
+        if (l.length() >= 2) {
+            lastChar = String.valueOf(l.charAt(l.length() - 1));
+        }
+        if (lastChar.equals(")")) {
+            label.setText(l.substring(0, l.length() - 1) + s + ")");
+        } else {
+            label.setText(label.getText() + s);
+        }
         negLimit = true;
+        return label;
+    }
+
+    private Label addTrigonometricIntoScreen(String s, Label label) {
+        if (label.getText().equals("")) {
+            if (s.equals("sin")) {
+                label.setText("sin()");
+            }
+            if (s.equals("cos")) {
+                label.setText("cos()");
+            }
+            if (s.equals("tan")) {
+                label.setText("tan()");
+            }
+            limit = true;
+            trigLimit = true;
+        }
+
         return label;
     }
 
@@ -241,7 +287,16 @@ public class UserInterface extends Application {
             label.setText("");
         }
         if (!dotLimit) {
-            label.setText(label.getText() + ".");
+            String l = label.getText();
+            String lastChar = "";
+            if (l.length() >= 2) {
+                lastChar = String.valueOf(l.charAt(l.length() - 1));
+            }
+            if (lastChar.equals(")")) {
+                label.setText(l.substring(0, l.length() - 1) + "." + ")");
+            } else {
+                label.setText(label.getText() + ".");
+            }
             dotLimit = true;
         }
 
@@ -252,8 +307,17 @@ public class UserInterface extends Application {
         if (label.getText().equals("error")) {
             label.setText("");
         }
-        if (!negLimit || label.getText().equals("")) {
-            label.setText(label.getText() + "-");
+        if ((!negLimit || label.getText().equals("")) && !label.getText().equals(".")) {
+            String l = label.getText();
+            String lastChar = "";
+            if (l.length() >= 2) {
+                lastChar = String.valueOf(l.charAt(l.length() - 1));
+            }
+            if (lastChar.equals(")")) {
+                label.setText(l.substring(0, l.length() - 1) + "-" + ")");
+            } else {
+                label.setText(label.getText() + "-");
+            }
             negLimit = true;
         }
 
@@ -271,9 +335,13 @@ public class UserInterface extends Application {
 
         String last = String.valueOf(s.charAt(s.length() - 1));
 
-        if (last.equals(" ")) {
+        if (last.equals(")")) {
+            label.setText("");
+            limit = false;
+            trigLimit = false;
+        } else if (last.equals(" ")) {
             label.setText(s.substring(0, s.length() - 3));
-            this.limit = false;
+            limit = false;
         } else {
             if (last.equals(".")) {
                 dotLimit = false;
