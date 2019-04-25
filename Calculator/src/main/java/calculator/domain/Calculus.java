@@ -15,6 +15,8 @@ public class Calculus {
     /**
      * Konstruktori luo "last"-oliomuuttujan tyhjällä merkkijonolla sekä
      * HistoryDao-olion.
+     *
+     * @throws java.lang.Exception
      */
     public Calculus() throws Exception {
         last = "";
@@ -30,6 +32,7 @@ public class Calculus {
      * add-metodia.
      *
      * @param s laskimen näytössä oleva merkkijono
+     * @throws java.lang.Exception
      *
      * @see calculator.dao.HistoryDao#addItem(java.lang.String)
      *
@@ -47,42 +50,22 @@ public class Calculus {
         }
         double first = Double.valueOf(parts[0]);
         double second = Double.valueOf(parts[2]);
-        double answer = 0;
-        if (parts[1].equals("+")) {
-            answer = first + second;
-        } else if (parts[1].equals("-")) {
-            answer = first - second;
-        } else if (parts[1].equals("*")) {
-            answer = first * second;
-        } else if (parts[1].equals("/")) {
-            if (second == 0) {
-                return "error";
-            }
-            answer = first / second;
-        } else if (parts[1].equals("^")) {
-            answer = Math.pow(first, second);
-        } else if (parts[1].equals("root")) {
-            if (second == 0) {
-                return "error";
-            }
-            second = 1 / second;
-            answer = Math.pow(first, second);
+        String function = parts[1];
+
+        double answer = calculateHelp(first, second, function);
+
+        if (answer == Double.POSITIVE_INFINITY) {
+            return "error";
         }
-        answer = (double) Math.round(answer * 100000d) / 100000d;
-        String answerString = String.valueOf(answer);
-        String lastChar = String.valueOf(answerString.charAt(answerString.length() - 1));
-        String secondLastChar = String.valueOf(answerString.charAt(answerString.length() - 2));
-
-        if (lastChar.equals("0") && secondLastChar.equals(".")) {
-            answerString = answerString.substring(0, answerString.length() - 2);
-        }
-
-        historydao.addItem(s + " = " + answerString);
-        last = answerString;
-        return answerString;
-
+        return answerHelp(answer, s);
     }
 
+    /**
+     * Metodi laskee sini, kosini tai tangenttifunktion.
+     * @param s laskimen näytössä oleva merkkijono
+     * @return laskun vastaus merkkijonona, tai palauttaa parametrin jos laskussa ei yhtään numeroa
+     * @throws java.lang.Exception
+     */
     public String calculateTrigonometric(String s) throws Exception {
         if (s.length() == 5) {
             return s;
@@ -100,26 +83,16 @@ public class Calculus {
             answer = Math.tan(answer);
         }
 
-        answer = (double) Math.round(answer * 100000d) / 100000d;
-        String answerString = String.valueOf(answer);
-        String lastChar = String.valueOf(answerString.charAt(answerString.length() - 1));
-        String secondLastChar = String.valueOf(answerString.charAt(answerString.length() - 2));
-
-        if (lastChar.equals("0") && secondLastChar.equals(".")) {
-            answerString = answerString.substring(0, answerString.length() - 2);
-        }
-
-        historydao.addItem(s + " = " + answerString);
-        last = answerString;
-        return answerString;
-
+        return answerHelp(answer, s);
     }
+
 
     /**
      * Metodi luo listan HistodyDao:n listAll-metodilla ja muuttaa sen
      * merkkijonomuotoon. Lista laitetaan myös käänteiseen järjestykseen, jotta
      * uusin laskutoimitus on ruudun alareunassa.
      *
+     * @throws java.lang.Exception
      * @see calculator.dao.HistoryDao#listAll()
      *
      * @return historialista merkkijonomuodossa, jokainen laskutoimitus omalla
@@ -141,6 +114,7 @@ public class Calculus {
     /**
      * Metodi kutsuu HistoryDao:n metodia deleteAll.
      *
+     * @throws java.lang.Exception
      * @see calculator.dao.HistoryDao#deleteAll()
      *
      */
@@ -148,13 +122,48 @@ public class Calculus {
         historydao.deleteAll();
     }
 
-    /**
-     * Metodi palauttaa "last"-oliomuuttujan
-     *
-     * @return viimeisimmän laskutoimituksen vastaus merkkijonomuodossa
-     */
     public String getLast() {
         return last;
+    }
+
+    private double calculateHelp(double first, double second, String function) {
+        double answer = 0;
+        if (function.equals("+")) {
+            answer = first + second;
+        } else if (function.equals("-")) {
+            answer = first - second;
+        } else if (function.equals("*")) {
+            answer = first * second;
+        } else if (function.equals("/")) {
+            if (second == 0) {
+                return Double.POSITIVE_INFINITY;
+            }
+            answer = first / second;
+        } else if (function.equals("^")) {
+            answer = Math.pow(first, second);
+        } else if (function.equals("root")) {
+            if (second == 0) {
+                return Double.POSITIVE_INFINITY;
+            }
+            second = 1 / second;
+            answer = Math.pow(first, second);
+        }
+        return answer;
+    }
+
+    private String answerHelp(double answer, String s) throws Exception {
+        answer = (double) Math.round(answer * 100000d) / 100000d;
+        String answerString = String.valueOf(answer);
+        String lastChar = String.valueOf(answerString.charAt(answerString.length() - 1));
+        String secondLastChar = String.valueOf(answerString.charAt(answerString.length() - 2));
+
+        if (lastChar.equals("0") && secondLastChar.equals(".")) {
+            answerString = answerString.substring(0, answerString.length() - 2);
+        }
+
+        historydao.addItem(s + " = " + answerString);
+        last = answerString;
+        return answerString;
     }
 
 }

@@ -13,8 +13,9 @@ import java.util.List;
 public class HistoryDao {
 
     /**
-     * Metodi ottaa yhteyden tietokantaan ja luo listan tietokantakyselyn tuloksesta.
-     * 
+     * Metodi ottaa yhteyden tietokantaan ja luo listan tietokantakyselyn
+     * tuloksesta.
+     *
      * @return History-taulun 10 viimeisintä riviä listana.
      */
     public List<String> listAll() throws Exception {
@@ -39,10 +40,11 @@ public class HistoryDao {
 
     }
 
-    /** 
+    /**
      * Metodi ottaa yhteyden tietokantaan ja lisää History-tauluun uuden rivin.
-     * 
-     * @param item Calculus-luokan calculate-metodin antama merkkijono laskutoimituksesta.
+     *
+     * @param item Calculus-luokan calculate-metodin antama merkkijono
+     * laskutoimituksesta.
      */
     public void addItem(String item) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");

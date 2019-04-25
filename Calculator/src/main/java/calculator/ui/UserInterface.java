@@ -307,7 +307,7 @@ public class UserInterface extends Application {
         if (label.getText().equals("error")) {
             label.setText("");
         }
-        if ((!negLimit || label.getText().equals("")) && !label.getText().equals(".")) {
+        if ((!negLimit || label.getText().equals("")) && !dotLimit) {
             String l = label.getText();
             String lastChar = "";
             if (l.length() >= 2) {
