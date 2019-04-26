@@ -12,5 +12,6 @@
 | 15.4. | 1    | jar-tiedosto ja release, ongelmia niiden kanssa |
 | 16.4. | 2    | pari lisätoiminnallisuutta ja sekvenssikaavio |
 | 24.4. | 4    | Trigonometriset funktiot, javadoc, koodin paloittelu |
-| yht   | 26   | | 
+| 26.4. | 2    | Dokumentaatiota |
+| yht   | 28   | | 
 
