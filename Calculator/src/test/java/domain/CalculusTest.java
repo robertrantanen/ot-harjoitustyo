@@ -53,6 +53,11 @@ public class CalculusTest {
     }
 
     @Test
+    public void CantRootWithZero() throws Exception {
+        assertEquals("error", calculator.calculate("27 root 0"));
+    }
+
+    @Test
     public void emptyRemainsEmpty() throws Exception {
         assertEquals("", calculator.calculate(""));
     }
@@ -75,14 +80,14 @@ public class CalculusTest {
     }
 
     @Test
-    public void getLastItemsFromHistoryListWorks() throws Exception {
+    public void getLastItemsFromHistoryWorks() throws Exception {
         calculator.deleteHistory();
         calculator.calculate("1 + 1");
         assertEquals("1 + 1 = 2" + "\n", calculator.getLastItemsFromHistory());
     }
 
     @Test
-    public void getLastItemsFromHistoryListWithMultipleItems() throws Exception {
+    public void getLastItemsFromHistoryWithMultipleItems() throws Exception {
         calculator.deleteHistory();
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
@@ -93,7 +98,7 @@ public class CalculusTest {
     }
 
     @Test
-    public void getLastItemsFromHistoryListWitOver10Items() throws Exception {
+    public void getLastItemsFromHistoryWithOver10Items() throws Exception {
         calculator.deleteHistory();
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
@@ -116,6 +121,26 @@ public class CalculusTest {
                 + "9 + 9 = 18" + "\n"
                 + "10 + 10 = 20" + "\n"
                 + "11 + 11 = 22" + "\n", calculator.getLastItemsFromHistory());
+    }
+
+    @Test
+    public void sinFunctionWorks() throws Exception {
+        assertEquals("0.84147", calculator.calculateTrigonometric("sin(1)"));
+    }
+
+    @Test
+    public void cosFunctionWorks() throws Exception {
+        assertEquals("0.5403", calculator.calculateTrigonometric("cos(1)"));
+    }
+
+    @Test
+    public void tanFunctionWorks() throws Exception {
+        assertEquals("1.55741", calculator.calculateTrigonometric("tan(1)"));
+    }
+
+    @Test
+    public void calculateTrigonometricReturnsParamaterIfNothingToCalculate() throws Exception {
+        assertEquals("sin()", calculator.calculateTrigonometric("sin()"));
     }
 
     @Test

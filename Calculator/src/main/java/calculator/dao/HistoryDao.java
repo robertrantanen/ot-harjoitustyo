@@ -17,6 +17,7 @@ public class HistoryDao {
      * tuloksesta.
      *
      * @return History-taulun 10 viimeisintä riviä listana.
+     * @throws java.lang.Exception e
      */
     public List<String> listAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
@@ -45,6 +46,7 @@ public class HistoryDao {
      *
      * @param item Calculus-luokan calculate-metodin antama merkkijono
      * laskutoimituksesta.
+     * @throws java.lang.Exception e
      */
     public void addItem(String item) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
@@ -61,6 +63,7 @@ public class HistoryDao {
 
     /**
      * Metodi poistaa kaikki rivit History-taulusta.
+     * @throws java.lang.Exception e
      */
     public void deleteAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");

@@ -16,7 +16,7 @@ public class Calculus {
      * Konstruktori luo "last"-oliomuuttujan tyhjällä merkkijonolla sekä
      * HistoryDao-olion.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception e
      */
     public Calculus() throws Exception {
         last = "";
@@ -25,16 +25,11 @@ public class Calculus {
 
     /**
      * Metodi muuttaa merkkijonomuotoisen laskutoimituksen laskettavaan muotoon,
-     * laskee sen ja palauttaa vastauksen sekä tallentaa sen
-     * "last"-oliomuuttujaan. Vastaus pyöristetään viiden desimaalin tarkkuuteen
-     * ja kokonaisluvuista karsitaan desimaalipiste pois. Metodi vastaa myös
-     * laskutoimituksen lisäämisestä historiaan kutsumalla HistoryDao-luokan
-     * add-metodia.
+     * laskee sen ja palauttaa vastauksen. Metodi kutsuu myös kahta apumetodia, calculateHelp ja answerHelp.
+     * calculateHelp auttaa lyhentämään koodia, kun taas answerHelp siistii vastausta ja kutsuu HistoryDaon metodia addItem.
      *
      * @param s laskimen näytössä oleva merkkijono
-     * @throws java.lang.Exception
-     *
-     * @see calculator.dao.HistoryDao#addItem(java.lang.String)
+     * @throws java.lang.Exception e
      *
      * @return laskun vastaus merkkijonona, tai merkkijono "error" jos lasku ei
      * ollut validi
@@ -64,7 +59,7 @@ public class Calculus {
      * Metodi laskee sini, kosini tai tangenttifunktion.
      * @param s laskimen näytössä oleva merkkijono
      * @return laskun vastaus merkkijonona, tai palauttaa parametrin jos laskussa ei yhtään numeroa
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception e
      */
     public String calculateTrigonometric(String s) throws Exception {
         if (s.length() == 5) {
@@ -92,7 +87,7 @@ public class Calculus {
      * merkkijonomuotoon. Lista laitetaan myös käänteiseen järjestykseen, jotta
      * uusin laskutoimitus on ruudun alareunassa.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception e
      * @see calculator.dao.HistoryDao#listAll()
      *
      * @return historialista merkkijonomuodossa, jokainen laskutoimitus omalla
@@ -114,7 +109,7 @@ public class Calculus {
     /**
      * Metodi kutsuu HistoryDao:n metodia deleteAll.
      *
-     * @throws java.lang.Exception
+     * @throws java.lang.Exception e
      * @see calculator.dao.HistoryDao#deleteAll()
      *
      */
