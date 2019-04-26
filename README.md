@@ -9,7 +9,7 @@ Käyttäjä pystyy tekemään matemaattisia laskutoimituksia sovelluksen avulla.
 
 ## Releaset
 
-[Viikko5](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.1)
+[Viikko6](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.2)
 
 ## Komentorivitoiminnot
 Komennot tehdään sovelluksen juurikansiossa, eli siinä missä on tiedosto pom.xml.
@@ -50,5 +50,15 @@ Checkstylen määrittelemät tarkistukset suoritetaan komennolla
 ```
 
 Raporttia voi tarkastella internetselaimella avaamalla tiedoston _target/site/checkstyle.html_.
+
+### JavaDoc
+
+JavaDoc luodaan komennolla
+
+```
+mvn javadoc:javadoc
+```
+
+JavaDocia voi tarkastella internetselaimella avaamalla tiedoston _target/site/apidocs/index.html_
 
 
