@@ -15,5 +15,6 @@
 | 24.4. | 2    | Trigonometriset funktiot |
 | 25.4. | 1    | Koodin paloittelu |
 | 26.4. | 2    | Dokumentaatiota |
-| yht   | 28   | | 
+| 3.5.  | 2    | Tietokantataulujen automaattinen luonti ja virheiden estämistä |
+| yht   | 30   | | 
 
