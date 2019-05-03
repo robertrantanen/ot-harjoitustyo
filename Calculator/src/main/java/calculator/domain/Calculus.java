@@ -12,21 +12,17 @@ public class Calculus {
     String last;
     HistoryDao historydao;
 
-    /**
-     * Konstruktori luo "last"-oliomuuttujan tyhjällä merkkijonolla sekä
-     * HistoryDao-olion.
-     *
-     * @throws java.lang.Exception e
-     */
     public Calculus() throws Exception {
         last = "";
         historydao = new HistoryDao();
+        historydao.createTables();
     }
 
     /**
      * Metodi muuttaa merkkijonomuotoisen laskutoimituksen laskettavaan muotoon,
-     * laskee sen ja palauttaa vastauksen. Metodi kutsuu myös kahta apumetodia, calculateHelp ja answerHelp.
-     * calculateHelp auttaa lyhentämään koodia, kun taas answerHelp siistii vastausta ja kutsuu HistoryDaon metodia addItem.
+     * laskee sen ja palauttaa vastauksen. Metodi kutsuu myös kahta apumetodia,
+     * calculateHelp ja answerHelp. calculateHelp auttaa lyhentämään koodia, kun
+     * taas answerHelp siistii vastausta ja kutsuu HistoryDaon metodia addItem.
      *
      * @param s laskimen näytössä oleva merkkijono
      * @throws java.lang.Exception e
@@ -40,7 +36,8 @@ public class Calculus {
         if (parts.length < 3) {
             return s;
         }
-        if (parts[0].equals(".") || parts[2].equals(".") || parts[0].equals("-") || parts[2].equals("-")) {
+        if (parts[0].equals(".") || parts[2].equals(".") || parts[0].equals("-") || parts[2].equals("-")
+                || checkIfTooManyDots(s)) {
             return "error";
         }
         double first = Double.valueOf(parts[0]);
@@ -57,8 +54,10 @@ public class Calculus {
 
     /**
      * Metodi laskee sini, kosini tai tangenttifunktion.
+     *
      * @param s laskimen näytössä oleva merkkijono
-     * @return laskun vastaus merkkijonona, tai palauttaa parametrin jos laskussa ei yhtään numeroa
+     * @return laskun vastaus merkkijonona, tai palauttaa parametrin jos
+     * laskussa ei yhtään numeroa
      * @throws java.lang.Exception e
      */
     public String calculateTrigonometric(String s) throws Exception {
@@ -80,7 +79,6 @@ public class Calculus {
 
         return answerHelp(answer, s);
     }
-
 
     /**
      * Metodi luo listan HistodyDao:n listAll-metodilla ja muuttaa sen
@@ -119,6 +117,22 @@ public class Calculus {
 
     public String getLast() {
         return last;
+    }
+
+    private boolean checkIfTooManyDots(String s) {
+        boolean error = false;
+
+        int dots = 0;
+        for (int i = 0; i < s.length(); i++) {
+            String character = String.valueOf(s.charAt(i));
+            if (character.equals(".")) {
+                dots++;
+            }
+        }
+        if (dots > 2) {
+            error = true;
+        }
+        return error;
     }
 
     private double calculateHelp(double first, double second, String function) {

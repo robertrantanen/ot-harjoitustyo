@@ -63,12 +63,32 @@ public class HistoryDao {
 
     /**
      * Metodi poistaa kaikki rivit History-taulusta.
+     *
      * @throws java.lang.Exception e
      */
     public void deleteAll() throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
 
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM History");
+
+        stmt.executeUpdate();
+
+        stmt.close();
+        connection.close();
+
+    }
+
+    
+    /**
+     * Metodi luo History-taulun jos sitä ei ole olemassa.
+     *
+     * @throws java.lang.Exception e
+     */
+    public void createTables() throws Exception {
+        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+
+        PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS History"
+                + "(id INTEGER PRIMARY KEY AUTO_INCREMENT, item VARCHAR(255))");
 
         stmt.executeUpdate();
 
