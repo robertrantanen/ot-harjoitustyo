@@ -16,5 +16,6 @@
 | 25.4. | 1    | Koodin paloittelu |
 | 26.4. | 2    | Dokumentaatiota |
 | 3.5.  | 2    | Tietokantataulujen automaattinen luonti ja virheiden estämistä |
-| yht   | 30   | | 
+| 4.5.  | 1    | Rikkoutuneen jacocon korjaaminen ja muuta pientä |
+| yht   | 31   | | 
 
