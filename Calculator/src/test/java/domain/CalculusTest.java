@@ -73,6 +73,11 @@ public class CalculusTest {
     }
 
     @Test
+    public void properErrorMessage2() throws Exception {
+        assertEquals("error", calculator.calculate("1.1.1.1.1 + 1.1.1.1"));
+    }
+
+    @Test
     public void getLastWorks() throws Exception {
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
