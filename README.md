@@ -40,8 +40,11 @@ Komento
 mvn package
 ```
 
-luo kansioon _target_ suoritettavan jar-tiedoston _Calculator-1.0-SNAPSHOT.jar_. Sovellus ei kuitenkaan toimi target-kansiossa, sillä se ei pääse käyttämään tarvittavia tietokantatauluja. jar-tiedosto pitää siirtää juurikansioon ensin.
+luo kansioon _target_ suoritettavan jar-tiedoston _Calculator-1.0-SNAPSHOT.jar_. Jarin voi sitten ajaa komennolla
 
+```
+java -jar target/Calculator-1.0-SNAPSHOT.jar
+```
 
 ### Checkstyle
 
