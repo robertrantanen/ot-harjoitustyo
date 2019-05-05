@@ -252,7 +252,7 @@ public class UserInterface extends Application {
     }
 
     private Label addTrigonometricIntoScreen(String s, Label label) {
-        if (label.getText().equals("")) {
+        if (!limit) {
             if (s.equals("sin")) {
                 label.setText("sin()");
             }
@@ -336,9 +336,18 @@ public class UserInterface extends Application {
         String last = String.valueOf(s.charAt(s.length() - 1));
 
         if (last.equals(")")) {
-            label.setText("");
-            limit = false;
-            trigLimit = false;
+            String secondLast = String.valueOf(s.charAt(s.length() - 2));
+            if (secondLast.equals("(")) {
+                label.setText("");
+                limit = false;
+                trigLimit = false;
+            } else {
+                if (secondLast.equals(".")) {
+                    dotLimit = false;
+                }
+                label.setText(s.substring(0, s.length() - 2) + ")");
+            }
+
         } else if (last.equals(" ")) {
             label.setText(s.substring(0, s.length() - 3));
             limit = false;
