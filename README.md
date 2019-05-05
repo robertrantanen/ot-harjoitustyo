@@ -9,6 +9,8 @@ Käyttäjä pystyy tekemään matemaattisia laskutoimituksia sovelluksen avulla.
 
 [Arkkitehtuurikuvaus](https://github.com/robertrantanen/ot-harjoitustyo/blob/master/Documentation/arkkitehtuuri.md)
 
+[Testausdokumentti](https://github.com/robertrantanen/ot-harjoitustyo/blob/master/Documentation/testaus.md)
+
 ## Releaset
 
 [Lopullinen](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.3)
