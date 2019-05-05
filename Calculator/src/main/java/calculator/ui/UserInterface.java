@@ -26,10 +26,15 @@ public class UserInterface extends Application {
     static boolean negLimit = false;
     static boolean trigLimit = false;
     ArrayList<Button> buttons = new ArrayList<>();
+    Calculus calculator;
+
+    @Override
+    public void init() throws Exception {
+        calculator = new Calculus("jdbc:h2:./database");
+    }
 
     @Override
     public void start(Stage stage) throws Exception {
-        Calculus calculator = new Calculus();
 
         BorderPane mainLayout = new BorderPane();
         mainLayout.setPrefSize(450, 450);

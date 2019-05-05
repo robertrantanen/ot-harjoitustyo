@@ -9,12 +9,12 @@ import java.util.List;
  */
 public class Calculus {
 
-    String last;
-    HistoryDao historydao;
+    private String last;
+    private HistoryDao historydao;
 
-    public Calculus() throws Exception {
+    public Calculus(String db) throws Exception {
         last = "";
-        historydao = new HistoryDao("jdbc:h2:./database");
+        historydao = new HistoryDao(db);
         historydao.createTables();
     }
 
@@ -119,15 +119,6 @@ public class Calculus {
         return last;
     }
 
-    /**
-     * Metodi mahdollistaa feikin tietokannan käyttämisen testiluokassa.
-     * @param db tietokannan nimi
-     * @throws Exception e
-     */
-    public void setHistoryDao(String db) throws Exception {
-        this.historydao = new HistoryDao(db);
-        historydao.createTables();
-    }
 
     private boolean checkIfTooManyDots(String s) {
         boolean error = false;

@@ -11,8 +11,7 @@ public class CalculusTest {
 
     @Before
     public void setUp() throws Exception {
-        calculator = new Calculus();
-        calculator.setHistoryDao("jdbc:h2:./fakedatabase");
+        calculator = new Calculus("jdbc:h2:./fakedatabase");
     }
 
     @Test
