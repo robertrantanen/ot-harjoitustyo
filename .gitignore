@@ -2,3 +2,5 @@
 /Calculator/target/
 /Calculator/nbproject/
 *.jar
+*.db
+

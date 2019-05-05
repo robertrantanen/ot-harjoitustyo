@@ -11,6 +11,13 @@ import java.util.List;
  * Luokka vastaa tietokantaoperaatioista.
  */
 public class HistoryDao {
+    
+    private String db;
+
+    public HistoryDao(String db) {
+        this.db = db;
+    }
+    
 
     /**
      * Metodi ottaa yhteyden tietokantaan ja luo listan tietokantakyselyn
@@ -20,7 +27,7 @@ public class HistoryDao {
      * @throws java.lang.Exception e
      */
     public List<String> listAll() throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+        Connection connection = DriverManager.getConnection(db, "", "");
 
         PreparedStatement stmt = connection.prepareStatement("SELECT item FROM History ORDER BY id DESC LIMIT 10");
         ResultSet rs = stmt.executeQuery();
@@ -49,7 +56,7 @@ public class HistoryDao {
      * @throws java.lang.Exception e
      */
     public void addItem(String item) throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+        Connection connection = DriverManager.getConnection(db, "", "");
 
         PreparedStatement stmt = connection.prepareStatement("INSERT INTO History (item) VALUES (?)");
         stmt.setString(1, item);
@@ -67,7 +74,7 @@ public class HistoryDao {
      * @throws java.lang.Exception e
      */
     public void deleteAll() throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+        Connection connection = DriverManager.getConnection(db, "", "");
 
         PreparedStatement stmt = connection.prepareStatement("DELETE FROM History");
 
@@ -85,7 +92,7 @@ public class HistoryDao {
      * @throws java.lang.Exception e
      */
     public void createTables() throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:h2:./database", "", "");
+        Connection connection = DriverManager.getConnection(db, "", "");
 
         PreparedStatement stmt = connection.prepareStatement("CREATE TABLE IF NOT EXISTS History"
                 + "(id INTEGER PRIMARY KEY AUTO_INCREMENT, item VARCHAR(255))");

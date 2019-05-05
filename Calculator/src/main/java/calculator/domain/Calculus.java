@@ -14,7 +14,7 @@ public class Calculus {
 
     public Calculus() throws Exception {
         last = "";
-        historydao = new HistoryDao();
+        historydao = new HistoryDao("jdbc:h2:./database");
         historydao.createTables();
     }
 
@@ -117,6 +117,16 @@ public class Calculus {
 
     public String getLast() {
         return last;
+    }
+
+    /**
+     * Metodi mahdollistaa feikin tietokannan käyttämisen testiluokassa.
+     * @param db tietokannan nimi
+     * @throws Exception e
+     */
+    public void setHistoryDao(String db) throws Exception {
+        this.historydao = new HistoryDao(db);
+        historydao.createTables();
     }
 
     private boolean checkIfTooManyDots(String s) {
