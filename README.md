@@ -32,7 +32,8 @@ Testikattavuusraportti tehdään komennolla
 mvn jacoco:report
 ```
 
-Raporttia voi tarkastella internetselaimella avaamalla tiedoston _target/site/jacoco/index.html_.
+Raporttia voi tarkastella internetselaimella avaamalla tiedoston _target/site/jacoco/index.html_.   
+Huom: jacoco meni minulla rikki yhdessä vaiheessa enkä ole testannut toimiiko se enää laitoksen koneilla.
 
 ### Suoritettavan jarin generointi
 
