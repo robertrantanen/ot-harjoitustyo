@@ -1,7 +1,8 @@
 ### Sovelluksen rakenne
-Pakkauskaavio linkkinä, sillä upotettu kuva kääntyi aina sivuttain. Lisään mahdollisesti vielä kirjautumistoiminnon, mutta sitä ei olla merkitty kaavioon.
+#### Pakkauskaavio
+![pakkauskaavio](https://raw.githubusercontent.com/robertrantanen/ot-harjoitustyo/master/Documentation/kuvat/pakkauskaavio.jpg)
 
-[pakkauskaavio](https://raw.githubusercontent.com/robertrantanen/ot-harjoitustyo/master/Documentation/kuvat/pakkauskaavio.jpg)
+Sovelluksen rakenne on aika yksinkertainen. Calculus-luokka vastaa kahdesta toiminnallisuudesta, joten se oltaisiin voitu jakaa kahteen eri luokkaan, mutta historiatoiminnallisuudesta yksinään vastaava luokka olisi ollut hyvin pieni. En jaksanut toteuttaa Dao-rajapintaa, sillä vain yksi luokka olisi perinyt sen. Vale-Dao:ja ei tarvita, sillä testit käyttävät eri tietokantaa kuin sovellus.
 
 ###  Käyttöliittymä
 Käyttöliittymä on rakennettu luokassa calculator.ui.UserInterface. Käyttöliittymä sisältää kaksi näkymää, laskutoimitusnäkymän ja historianäkymän. Laskutoimitusnäkymässä käyttäjä voi painella nappeja, jotka sitten ilmestyvät laskimen näyttöön. Historianäkymässä käyttäjä näkee 10 viimeistä laskutoimitusta ja voi poistaa historian.
