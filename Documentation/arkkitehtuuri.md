@@ -1,6 +1,6 @@
 ### Sovelluksen rakenne
 #### Pakkauskaavio
-![pakkauskaavio](https://raw.githubusercontent.com/robertrantanen/ot-harjoitustyo/master/Documentation/kuvat/pakkauskaavio.jpg)
+![pakkauskaavio](https://raw.githubusercontent.com/robertrantanen/ot-harjoitustyo/master/Documentation/kuvat/pakkauskaavio.png)
 
 Sovelluksen rakenne on aika yksinkertainen. Calculus-luokka vastaa kahdesta toiminnallisuudesta, joten se oltaisiin voitu jakaa kahteen eri luokkaan, mutta historiatoiminnallisuudesta yksinään vastaava luokka olisi ollut hyvin pieni. En jaksanut toteuttaa Dao-rajapintaa, sillä vain yksi luokka olisi perinyt sen. Vale-Dao:ja ei tarvita, sillä testit käyttävät eri tietokantaa kuin sovellus.
 
