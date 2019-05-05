@@ -13,7 +13,7 @@ Käyttäjä pystyy tekemään matemaattisia laskutoimituksia sovelluksen avulla.
 
 ## Releaset
 
-[Lopullinen](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.3)
+[Lopullinen](https://github.com/robertrantanen/ot-harjoitustyo/releases/tag/v1.3.1)
 
 ## Komentorivitoiminnot
 Komennot tehdään sovelluksen juurikansiossa, eli siinä missä on tiedosto pom.xml.
