@@ -36,8 +36,7 @@ public class Calculus {
         if (parts.length < 3) {
             return s;
         }
-        if (parts[0].equals(".") || parts[2].equals(".") || parts[0].equals("-") || parts[2].equals("-")
-                || checkIfTooManyDots(s)) {
+        if (checkErrors(parts[0]) || checkErrors(parts[2]) || checkIfTooManyDotsOrMinuses(parts[0]) || checkIfTooManyDotsOrMinuses(parts[2])) {
             return "error";
         }
         double first = Double.valueOf(parts[0]);
@@ -57,7 +56,7 @@ public class Calculus {
      *
      * @param s laskimen näytössä oleva merkkijono
      * @return laskun vastaus merkkijonona, tai palauttaa parametrin jos
-     * laskussa ei yhtään numeroa
+     * laskussa ei yhtään numeroa, tai "error" jos lasku ei ollut validi.
      * @throws java.lang.Exception e
      */
     public String calculateTrigonometric(String s) throws Exception {
@@ -66,6 +65,9 @@ public class Calculus {
         }
         String firstChar = String.valueOf(s.charAt(0));
         String number = s.substring(4, s.length() - 1);
+        if (checkErrors(number) || checkIfTooManyDotsOrMinuses(number)) {
+            return "error";
+        }
         double answer = Double.valueOf(number);
         if (firstChar.equals("s")) {
             answer = Math.sin(answer);
@@ -119,20 +121,33 @@ public class Calculus {
         return last;
     }
 
-
-    private boolean checkIfTooManyDots(String s) {
+    private boolean checkIfTooManyDotsOrMinuses(String s) {
         boolean error = false;
 
         int dots = 0;
+        int minuses = 0;
         for (int i = 0; i < s.length(); i++) {
             String character = String.valueOf(s.charAt(i));
             if (character.equals(".")) {
                 dots++;
             }
+            if (character.equals("-")) {
+                minuses++;
+            }
         }
-        if (dots > 2) {
+        if (dots > 1 || minuses > 1) {
             error = true;
         }
+        return error;
+    }
+
+    private boolean checkErrors(String s) {
+        boolean error = false;
+
+        if (s.equals(".") || s.equals("-") || s.equals("-.") || s.equals(".-")) {
+            error = true;
+        }
+
         return error;
     }
 

@@ -28,11 +28,25 @@ public class UserInterface extends Application {
     ArrayList<Button> buttons = new ArrayList<>();
     Calculus calculator;
 
+    /**
+     * Alustusmetodi. Calculus-olio luodaan parametrilla, joka kulkeutuu
+     * HistoryDao-luokkaan asti vastaamaan tietokannan nimestä.
+     *
+     * @throws Exception e
+     */
     @Override
     public void init() throws Exception {
         calculator = new Calculus("jdbc:h2:./database");
     }
 
+    /**
+     * Metodi vastaa yksinään koko käyttöliittymästä. Koodin selkeyttämiseksi ja
+     * toisteisuuden vähentämiseksi metodi kutsuu monia apumetodeja, mutta se on
+     * silti vähän liian pitkä.
+     *
+     * @param stage Pääikkuna
+     * @throws Exception e
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -258,6 +272,7 @@ public class UserInterface extends Application {
 
     private Label addTrigonometricIntoScreen(String s, Label label) {
         if (!limit) {
+            negLimit = false;
             if (s.equals("sin")) {
                 label.setText("sin()");
             }
@@ -346,9 +361,13 @@ public class UserInterface extends Application {
                 label.setText("");
                 limit = false;
                 trigLimit = false;
+                negLimit = false;
             } else {
                 if (secondLast.equals(".")) {
                     dotLimit = false;
+                }
+                if (secondLast.equals("-")) {
+                    negLimit = false;
                 }
                 label.setText(s.substring(0, s.length() - 2) + ")");
             }

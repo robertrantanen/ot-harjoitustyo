@@ -75,6 +75,16 @@ public class CalculusTest {
     }
 
     @Test
+    public void properErrorMessage3() throws Exception {
+        assertEquals("error", calculator.calculate("--1-1-1 + -1-1"));
+    }
+
+    @Test
+    public void properErrorMessage4() throws Exception {
+        assertEquals("error", calculator.calculateTrigonometric("sin(.)"));
+    }
+
+    @Test
     public void getLastWorks() throws Exception {
         calculator.calculate("1 + 1");
         calculator.calculate("2 + 2");
