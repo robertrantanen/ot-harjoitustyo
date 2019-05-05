@@ -17,6 +17,6 @@
 | 26.4. | 2    | Dokumentaatiota |
 | 3.5.  | 2    | Tietokantataulujen automaattinen luonti ja virheiden estämistä |
 | 4.5.  | 1    | Rikkoutuneen jacocon korjaaminen ja muuta pientä |
-| 5.5.  | 3    | Valetietokanta ja dokumentaatiota |
-| yht   | 34   | | 
+| 5.5.  | 4    | Valetietokanta, dokumentaatiota, virheiden estämistä |
+| yht   | 35   | | 
 
